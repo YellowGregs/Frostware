@@ -4,110 +4,221 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, purple, white);
-            color: #333;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            background-color: #ffffff; 
             overflow: hidden;
         }
-        .faq-container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px); 
-            transition: opacity 0.8s ease, transform 0.8s ease;
+        .background {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: -1;
         }
-        .faq-container.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .square {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(30, 144, 255, 0.5);
+            animation: float 3s ease-in-out infinite;
+            border-radius: 5px;
+        }
+        .square.glow {
+            box-shadow: 0 0 15px rgba(30, 144, 255, 1);
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 1;
+            padding-bottom: 20px;
+            max-height: calc(100vh - 40px); 
+            overflow-y: auto; 
         }
         h1 {
-            background: linear-gradient(135deg, blue, black);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3em;
+            text-align: center;
+            color: #1e90ff;
             margin-bottom: 20px;
         }
         .faq-item {
-            background: linear-gradient(135deg, blue, red);
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin: 10px 0;
             padding: 15px;
+            margin-bottom: 20px;
             cursor: pointer;
-            transition: transform 0.2s;
-            color: white;
+            position: relative;
+            transition: color 0.3s;
+            border: 1px solid #1e90ff;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.01);
         }
         .faq-item:hover {
-            transform: scale(1.02);
+            color: #1e90ff;
+        }
+        .question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .line {
+            border-bottom: 1px solid #1e90ff;
+            margin: 5px 0;
         }
         .answer {
-            margin-top: 10px;
+            max-height: 0;
+            overflow: hidden;
             opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            padding-top: 10px;
         }
-        .answer.visible {
+        .answer.show {
+            max-height: 100px;
             opacity: 1;
-            transform: translateY(0);
+        }
+        .arrow {
+            transition: transform 0.3s;
+        }
+        .arrow.rotate {
+            transform: rotate(90deg);
+        }
+        .toggle-button {
+            margin: 20px auto;
+            border: none;
+            background: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: yellow;
+            transition: transform 0.3s;
+        }
+        .toggle-button:hover {
+            transform: scale(1.1);
+        }
+        .dark-mode {
+            background-color: #04070c;
+            color: #e0e0e0;
+        }
+        .dark-mode .faq-item {
+            color: #e0e0e0;
+            border-color: #007acc;
+        }
+        .dark-mode .line {
+            border-color: #007acc;
+        }
+        /* Responsive styles */
+        @media (max-height: 600px) {
+            .faq-item {
+                padding: 10px; 
+            }
+            h1 {
+                font-size: 1.5rem; 
+            }
+            .faq-item h2 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-
-<div class="faq-container" id="faqContainer">
-    <h1>FAQ</h1>
-    <div class="faq-item" id="faq1">
-        <strong>My Fluxus Z Android crashes while opening the APK</strong>
-        <div class="answer" id="answer1">Disable notifications from Roblox via your app settings</div>
+    <div class="background" id="background"></div>
+    <div class="container">
+        <h1>Frequently Asked Questions</h1>
+        <button class="toggle-button" onclick="darkmode()" id="themeToggleButton">
+            <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <div class="question">
+                <h2>My Fluxus Z Android crashes while opening the APK</h2>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="line"></div>
+            <div class="answer">
+                Disable notifications from Roblox via your app settings.
+            </div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <div class="question">
+                <h2>My FrostWare Windows doesn't work</h2>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="line"></div>
+            <div class="answer">
+                There's a tutorial video in our server; check it out/restart your executor, and it should work.
+            </div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <div class="question">
+                <h2>When will Fluxus Z window release?</h2>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="line"></div>
+            <div class="answer">
+                Work in progress, expect a release in possibly November.
+            </div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(this)">
+            <div class="question">
+                <h2>Will the unc go up?</h2>
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+            <div class="line"></div>
+            <div class="answer">
+                Sure, we will try our best.
+            </div>
+        </div>
     </div>
-    <div class="faq-item" id="faq2">
-        <strong>My FrostWare Windows doesn't work</strong>
-        <div class="answer" id="answer2">There's a tutorial video in our server, check it out/restart your executor and it should work</div>
-    </div>
-    <div class="faq-item" id="faq3">
-        <strong>When will Fluxus Z window release?</strong>
-        <div class="answer" id="answer3">Work in progress, expect a release in possibly November</div>
-    </div>
-    <div class="faq-item" id="faq4">
-        <strong>Will the unc go up?</strong>
-        <div class="answer" id="answer4">Sure we will try our best</div>
-    </div>
-</div>
-
-<script>
-    const faqContainer = document.getElementById('faqContainer');
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    setTimeout(() => {
-        faqContainer.classList.add('visible');
-    }, 100);
-
-    faqItems.forEach(item => {
-        item.addEventListener('click', () => {
+    <script>
+        function toggleAnswer(item) {
             const answer = item.querySelector('.answer');
-
-            if (answer.classList.contains('visible')) {
-                answer.classList.remove('visible');
+            const arrow = item.querySelector('.arrow');
+            answer.classList.toggle('show');
+            arrow.classList.toggle('rotate');
+        }
+        function darkmode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            document.getElementById('themeIcon').classList.toggle('fa-sun', !isDarkMode);
+            document.getElementById('themeIcon').classList.toggle('fa-moon', isDarkMode);
+        }
+        function loadTheme() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeIcon').classList.add('fa-moon');
             } else {
-                
-                document.querySelectorAll('.answer').forEach(ans => {
-                    ans.classList.remove('visible');
-                });
-                answer.classList.add('visible');
+                document.getElementById('themeIcon').classList.add('fa-sun');
             }
-        });
-    });
-</script>
+        }
+        function createSquares(num) {
+            const background = document.getElementById('background');
+            for (let i = 0; i < num; i++) {
+                const square = document.createElement('div');
+                square.className = 'square' + (Math.random() > 0.5 ? ' glow' : '');
+                const size = Math.random() * 50 + 20;
+                square.style.width = `${size}px`;
+                square.style.height = `${size}px`;
+                square.style.top = `${Math.random() * 100}vh`;
+                square.style.left = `${Math.random() * 100}vw`;
+                square.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                background.appendChild(square);
+            }
+        }
 
+        loadTheme();
+        createSquares(10);
+    </script>
 </body>
 </html>
