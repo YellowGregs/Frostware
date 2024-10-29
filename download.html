@@ -3,172 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluxus Z - Download</title>
+    <title>FluxusZ - Download</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <style>
         body {
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, lightblue, skyblue);
-            height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            position: relative;
             overflow: hidden;
-            transition: opacity 0.5s ease;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .square {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(30, 144, 255, 0.5);
+            animation: float 5s ease-in-out infinite;
+            border-radius: 8px;
+        }
+        .square.glow {
+            box-shadow: 0 0 10px rgba(30, 144, 255, 1);
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0); }
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
         }
         h1 {
-            font-size: 3em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 2em;
+            text-align: center;
+            color: #333;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, darkblue, purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeIn 1s ease;
+            color: #1e90ff;
         }
-        .options {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .option {
-            background: linear-gradient(135deg, blue, red);
-            border: none;
-            border-radius: 5px;
-            color: white;
-            padding: 15px 30px;
-            margin: 10px 0;
+        .platform {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.5em;
-            transition: transform 0.2s, background 0.3s;
-            opacity: 1;
-            animation: fadeIn 1s ease;
+            background-color: rgba(255, 255, 255, 0.02);
+            transition: background-color 0.3s;
         }
-        .option:hover {
-            transform: scale(1.05);
-            background: darkred;
+        .platform:hover {
+            background-color: rgba(255, 255, 255, 0.3);
         }
-        .option:active {
-            transform: scale(0.95);
-        }
-        .hidden {
-            display: none;
-        }
-        .fade-out {
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        .platform h2 {
+            margin: 0;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .download-options {
+            max-height: 0;
+            overflow: hidden;
             opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            text-align: center;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
         }
-        .download-options.visible {
+        .download-options.show {
+            max-height: 200px;
             opacity: 1;
-            transform: translateY(0);
+            margin-top: 10px;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .download-link {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            color: #1e90ff;
+            text-decoration: none;
+            border-radius: 5px;
+            background-color: rgba(30, 144, 255, 0.1);
+            transition: background-color 0.3s;
+        }
+        .download-link:hover {
+            background-color: rgba(30, 144, 255, 0.2);
+        }
+        .arrow {
+            transition: transform 0.3s;
+        }
+        .arrow.rotate {
+            transform: rotate(90deg);
+        }
+        .toggle-button {
+            display: block;
+            margin: 0 auto 20px;
+            border: none;
+            background: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #333;
+            transition: transform 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dark-mode .container {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .dark-mode .platform {
+            background-color: rgba(40, 40, 40, 0.7);
+            border-color: #444;
+        }
+        .dark-mode .download-link {
+            color: #76c7ff;
+            background-color: rgba(30, 144, 255, 0.1);
+        }
+        .dark-mode .download-link:hover {
+            background-color: rgba(30, 144, 255, 0.2);
+        }
+        .dark-mode .toggle-button {
+            color: #ffd700;
         }
     </style>
 </head>
 <body>
+    <div class="background" id="background"></div>
+    <div class="container">
+        <h1>FluxusZ Download</h1>
+        <button class="toggle-button" onclick="toggleDarkMode()" id="themeToggleButton">&#9728;</button>
 
-<h1>Fluxus Z</h1>
+        <div class="platform" onclick="toggleDropdown('android')">
+            <h2>Android <span class="arrow" id="androidArrow">&#9654;</span></h2>
+            <div class="download-options" id="androidOptions">
+                <a href="#" class="download-link">FluxusZ (W.I.P)</a>
+            </div>
+        </div>
 
-<div class="options" id="options">
-    <button class="option" id="android">Android</button>
-    <button class="option" id="ios">iOS</button>
-    <button class="option" id="windows">Windows</button>
-</div>
+        <div class="platform" onclick="toggleDropdown('ios')">
+            <h2>iOS <span class="arrow" id="iosArrow">&#9654;</span></h2>
+            <div class="download-options" id="iosOptions">
+                <a href="#" class="download-link">FluxusZ (W.I.P)</a>
+            </div>
+        </div>
 
-<div class="download-options hidden" id="downloadOptions">
-    <button class="option hidden" id="fluxusZ">FluxusZ</button>
-    <a class="option hidden" id="frostware" href="https://gofile.io/d/YHKJYI" target="_blank">Frostware</a>
-    <button class="option hidden" id="backButton">Back</button>
-    <button class="option hidden" id="mainMenuButton">Back to Main Menu</button>
-</div>
+        <div class="platform" onclick="toggleDropdown('windows')">
+            <h2>Windows <span class="arrow" id="windowsArrow">&#9654;</span></h2>
+            <div class="download-options" id="windowsOptions">
+                <a href="#" class="download-link">FluxusZ (W.I.P)</a>
+                <a href="https://gofile.io/d/YHKJYI" class="download-link">FrostWare</a>
+            </div>
+        </div>
+    </div>
 
-<script>
-    const options = document.getElementById('options');
-    const downloadOptions = document.getElementById('downloadOptions');
+    <script>
+        function toggleDropdown(platform) {
+            const options = document.getElementById(platform + 'Options');
+            const arrow = document.getElementById(platform + 'Arrow');
+            options.classList.toggle('show');
+            arrow.classList.toggle('rotate');
+        }
 
-    document.getElementById('android').addEventListener('click', () => {
-        fadeOutOptions(() => {
-            showDownloadOptions(['fluxusZ', 'mainMenuButton']);
-        });
-    });
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            const themeButton = document.getElementById('themeToggleButton');
+            themeButton.innerHTML = isDarkMode ? '&#9790;' : '&#9728;';
+        }
 
-    document.getElementById('ios').addEventListener('click', () => {
-        fadeOutOptions(() => {
-            showDownloadOptions(['fluxusZ', 'mainMenuButton']);
-        });
-    });
+        function loadTheme() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeToggleButton').innerHTML = '&#9790;';
+            } else {
+                document.getElementById('themeToggleButton').innerHTML = '&#9728;';
+            }
+        }
 
-    document.getElementById('windows').addEventListener('click', () => {
-        fadeOutOptions(() => {
-            showDownloadOptions(['fluxusZ', 'frostware', 'mainMenuButton']);
-        });
-    });
+        function createSquares(num) {
+            const background = document.getElementById('background');
+            for (let i = 0; i < num; i++) {
+                const square = document.createElement('div');
+                square.className = 'square' + (Math.random() > 0.5 ? ' glow' : '');
+                const size = Math.random() * 50 + 20; // Random size between 20px and 70px
+                square.style.width = `${size}px`;
+                square.style.height = `${size}px`;
+                square.style.top = `${Math.random() * 100}vh`;
+                square.style.left = `${Math.random() * 100}vw`;
+                square.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                background.appendChild(square);
+            }
+        }
 
-    document.getElementById('backButton').addEventListener('click', () => {
-        fadeOutDownloadOptions(() => {
-            showOptions();
-        });
-    });
-
-    document.getElementById('mainMenuButton').addEventListener('click', () => {
-        fadeOutDownloadOptions(() => {
-            showOptions();
-        });
-    });
-
-    const fadeOutOptions = (callback) => {
-        options.classList.add('fade-out');
-        setTimeout(() => {
-            options.classList.add('hidden');
-            callback();
-        }, 500);
-    };
-
-    const fadeOutDownloadOptions = (callback) => {
-        downloadOptions.classList.remove('visible');
-        setTimeout(() => {
-            downloadOptions.classList.add('hidden');
-            callback();
-        }, 500);
-    };
-
-    const showDownloadOptions = (buttonsToShow) => {
-        downloadOptions.classList.remove('hidden');
-
-        buttonsToShow.forEach(buttonId => {
-            const button = document.getElementById(buttonId);
-            button.classList.remove('hidden');
-            button.classList.add('visible');
-        });
-
-        setTimeout(() => {
-            downloadOptions.classList.add('visible');
-        }, 10);
-    };
-
-    const showOptions = () => {
-        options.classList.remove('hidden');
-        options.classList.remove('fade-out');
-        setTimeout(() => {
-            options.classList.remove('fade-out');
-        }, 10);
-    };
-</script>
-
+        loadTheme();
+        createSquares(15);
+    </script>
 </body>
 </html>
