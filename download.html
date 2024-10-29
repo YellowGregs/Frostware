@@ -9,22 +9,22 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, lightblue, skyblue); /* Sky background */
+            background: linear-gradient(to bottom, lightblue, skyblue);
             height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Prevent scrolling */
-            transition: opacity 0.5s ease; /* Fade transition */
+            overflow: hidden;
+            transition: opacity 0.5s ease;
         }
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, darkblue, purple); /* Mixture of dark blue and purple */
+            background: linear-gradient(135deg, darkblue, purple);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; /* Makes the text transparent and shows gradient */
-            animation: fadeIn 1s ease; /* Fade-in animation */
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1s ease;
         }
         .options {
             display: flex;
@@ -32,7 +32,7 @@
             align-items: center;
         }
         .option {
-            background: linear-gradient(135deg, blue, red); /* Gradient for buttons */
+            background: linear-gradient(135deg, blue, red);
             border: none;
             border-radius: 5px;
             color: white;
@@ -40,33 +40,33 @@
             margin: 10px 0;
             cursor: pointer;
             font-size: 1.5em;
-            transition: transform 0.2s, background 0.3s; /* Button hover and click effects */
-            opacity: 1; /* Fully visible */
-            animation: fadeIn 1s ease; /* Fade-in animation */
+            transition: transform 0.2s, background 0.3s;
+            opacity: 1;
+            animation: fadeIn 1s ease;
         }
         .option:hover {
-            transform: scale(1.05); /* Scale on hover */
-            background: darkred; /* Darker background on hover */
+            transform: scale(1.05);
+            background: darkred;
         }
         .option:active {
-            transform: scale(0.95); /* Scale down on click */
+            transform: scale(0.95);
         }
         .hidden {
-            display: none; /* Hide elements */
+            display: none;
         }
         .fade-out {
-            opacity: 0; /* Fade out */
-            transition: opacity 0.5s ease; /* Transition effect */
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
         .download-options {
-            opacity: 0; /* Start hidden */
-            transform: translateY(-10px); /* Start above */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
-            text-align: center; /* Center align the download options */
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            text-align: center;
         }
         .download-options.visible {
-            opacity: 1; /* Fully visible */
-            transform: translateY(0); /* Reset position */
+            opacity: 1;
+            transform: translateY(0);
         }
         @keyframes fadeIn {
             from {
@@ -92,9 +92,9 @@
 
 <div class="download-options hidden" id="downloadOptions">
     <button class="option hidden" id="fluxusZ">FluxusZ</button>
-    <button class="option hidden" id="frostware" href="https://gofile.io/d/YHKJYI">Frostware</button>
-    <button class="option hidden" id="backButton">Back</button> <!-- Back button -->
-    <button class="option hidden" id="mainMenuButton">Back to Main Menu</button> <!-- Back to Main Menu button -->
+    <a class="option hidden" id="frostware" href="https://gofile.io/d/YHKJYI" target="_blank">Frostware</a>
+    <button class="option hidden" id="backButton">Back</button>
+    <button class="option hidden" id="mainMenuButton">Back to Main Menu</button>
 </div>
 
 <script>
@@ -119,17 +119,15 @@
         });
     });
 
-    // Back button functionality
     document.getElementById('backButton').addEventListener('click', () => {
         fadeOutDownloadOptions(() => {
             showOptions();
         });
     });
 
-    // Main menu button functionality
     document.getElementById('mainMenuButton').addEventListener('click', () => {
         fadeOutDownloadOptions(() => {
-            showOptions(); // Show the main options again
+            showOptions();
         });
     });
 
@@ -138,7 +136,7 @@
         setTimeout(() => {
             options.classList.add('hidden');
             callback();
-        }, 500); // Match with fade-out duration
+        }, 500);
     };
 
     const fadeOutDownloadOptions = (callback) => {
@@ -146,31 +144,29 @@
         setTimeout(() => {
             downloadOptions.classList.add('hidden');
             callback();
-        }, 500); // Match with fade-out duration
+        }, 500);
     };
 
     const showDownloadOptions = (buttonsToShow) => {
         downloadOptions.classList.remove('hidden');
 
-        // Show specified buttons
         buttonsToShow.forEach(buttonId => {
             const button = document.getElementById(buttonId);
             button.classList.remove('hidden');
-            button.classList.add('visible'); // Trigger visibility animation
+            button.classList.add('visible');
         });
 
-        // Fade in the download options
         setTimeout(() => {
             downloadOptions.classList.add('visible');
-        }, 10); // Delay to allow for showing buttons
+        }, 10);
     };
 
     const showOptions = () => {
         options.classList.remove('hidden');
         options.classList.remove('fade-out');
         setTimeout(() => {
-            options.classList.remove('fade-out'); // Reset fade-out class
-        }, 10); // Small timeout to trigger the animation
+            options.classList.remove('fade-out');
+        }, 10);
     };
 </script>
 
