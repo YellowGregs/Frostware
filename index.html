@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxus Z</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #000;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5em;
+        }
+
+        .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            transform: scale(1.2);
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+            padding-top: 60px;
+        }
+
+        .intro h2 {
+            font-size: 1.2em;
+            color: #aaa;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .intro h1 {
+            font-size: 3em;
+            color: #00f;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .intro p {
+            font-size: 1em;
+            color: #00f;
+            letter-spacing: 2px;
+            filter: blur(1px);
+            animation: fadeInUp 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-container {
+            position: absolute;
+            right: 20px;
+            top: 60px;
+            display: none;
+        }
+
+        .dropdown-menu {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            background-color: #111;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .dropdown-menu li {
+            margin: 5px 0;
+        }
+
+        .dropdown-menu a {
+            color: #00f;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            background: #111;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background: #00f;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">FZ Team</div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    </header>
+
+    <main>
+        <div class="intro">
+            <h2>Introducing</h2>
+            <h1>Fluxus Z</h1>
+            <p>Next gen exploiting</p>
+        </div>
+    </main>
+
+    <div class="dropdown-container" id="dropdownContainer">
+        <ul class="dropdown-menu">
+            <li><a href="./download.html">Download</a></li>
+            <li><a href="./FAQ.html">FAQ</a></li>
+            <li><a href="./about.html">About Us</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const dropdownContainer = document.getElementById('dropdownContainer');
+            dropdownContainer.style.display = dropdownContainer.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>

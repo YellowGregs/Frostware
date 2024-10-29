@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, purple, white);
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .faq-container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px); 
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .faq-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1 {
+            background: linear-gradient(135deg, blue, black);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            background: linear-gradient(135deg, blue, red);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: white;
+        }
+        .faq-item:hover {
+            transform: scale(1.02);
+        }
+        .answer {
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .answer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<div class="faq-container" id="faqContainer">
+    <h1>FAQ</h1>
+    <div class="faq-item" id="faq1">
+        <strong>My Fluxus Z Android crashes while opening the APK</strong>
+        <div class="answer" id="answer1">Disable notifications from Roblox via your app settings</div>
+    </div>
+    <div class="faq-item" id="faq2">
+        <strong>My FrostWare Windows doesn't work</strong>
+        <div class="answer" id="answer2">There's a tutorial video in our server, check it out/restart your executor and it should work</div>
+    </div>
+    <div class="faq-item" id="faq3">
+        <strong>When will Fluxus Z window release?</strong>
+        <div class="answer" id="answer3">Work in progress, expect a release in possibly November</div>
+    </div>
+    <div class="faq-item" id="faq4">
+        <strong>Will the unc go up?</strong>
+        <div class="answer" id="answer4">Sure we will try our best</div>
+    </div>
+</div>
+
+<script>
+    const faqContainer = document.getElementById('faqContainer');
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    setTimeout(() => {
+        faqContainer.classList.add('visible');
+    }, 100);
+
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.querySelector('.answer');
+
+            if (answer.classList.contains('visible')) {
+                answer.classList.remove('visible');
+            } else {
+                
+                document.querySelectorAll('.answer').forEach(ans => {
+                    ans.classList.remove('visible');
+                });
+                answer.classList.add('visible');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

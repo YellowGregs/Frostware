@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxus Z - Download</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, lightblue, skyblue); /* Sky background */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Prevent scrolling */
+            transition: opacity 0.5s ease; /* Fade transition */
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, darkblue, purple); /* Mixture of dark blue and purple */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; /* Makes the text transparent and shows gradient */
+            animation: fadeIn 1s ease; /* Fade-in animation */
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .option {
+            background: linear-gradient(135deg, blue, red); /* Gradient for buttons */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 1.5em;
+            transition: transform 0.2s, background 0.3s; /* Button hover and click effects */
+            opacity: 1; /* Fully visible */
+            animation: fadeIn 1s ease; /* Fade-in animation */
+        }
+        .option:hover {
+            transform: scale(1.05); /* Scale on hover */
+            background: darkred; /* Darker background on hover */
+        }
+        .option:active {
+            transform: scale(0.95); /* Scale down on click */
+        }
+        .hidden {
+            display: none; /* Hide elements */
+        }
+        .fade-out {
+            opacity: 0; /* Fade out */
+            transition: opacity 0.5s ease; /* Transition effect */
+        }
+        .download-options {
+            opacity: 0; /* Start hidden */
+            transform: translateY(-10px); /* Start above */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+            text-align: center; /* Center align the download options */
+        }
+        .download-options.visible {
+            opacity: 1; /* Fully visible */
+            transform: translateY(0); /* Reset position */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Fluxus Z</h1>
+
+<div class="options" id="options">
+    <button class="option" id="android">Android</button>
+    <button class="option" id="ios">iOS</button>
+    <button class="option" id="windows">Windows</button>
+</div>
+
+<div class="download-options hidden" id="downloadOptions">
+    <button class="option hidden" id="fluxusZ">FluxusZ</button>
+    <button class="option hidden" id="frostware">Frostware</button>
+    <button class="option hidden" id="backButton">Back</button> <!-- Back button -->
+    <button class="option hidden" id="mainMenuButton">Back to Main Menu</button> <!-- Back to Main Menu button -->
+</div>
+
+<script>
+    const options = document.getElementById('options');
+    const downloadOptions = document.getElementById('downloadOptions');
+
+    document.getElementById('android').addEventListener('click', () => {
+        fadeOutOptions(() => {
+            showDownloadOptions(['fluxusZ', 'mainMenuButton']);
+        });
+    });
+
+    document.getElementById('ios').addEventListener('click', () => {
+        fadeOutOptions(() => {
+            showDownloadOptions(['fluxusZ', 'mainMenuButton']);
+        });
+    });
+
+    document.getElementById('windows').addEventListener('click', () => {
+        fadeOutOptions(() => {
+            showDownloadOptions(['fluxusZ', 'frostware', 'mainMenuButton']);
+        });
+    });
+
+    // Back button functionality
+    document.getElementById('backButton').addEventListener('click', () => {
+        fadeOutDownloadOptions(() => {
+            showOptions();
+        });
+    });
+
+    // Main menu button functionality
+    document.getElementById('mainMenuButton').addEventListener('click', () => {
+        fadeOutDownloadOptions(() => {
+            showOptions(); // Show the main options again
+        });
+    });
+
+    const fadeOutOptions = (callback) => {
+        options.classList.add('fade-out');
+        setTimeout(() => {
+            options.classList.add('hidden');
+            callback();
+        }, 500); // Match with fade-out duration
+    };
+
+    const fadeOutDownloadOptions = (callback) => {
+        downloadOptions.classList.remove('visible');
+        setTimeout(() => {
+            downloadOptions.classList.add('hidden');
+            callback();
+        }, 500); // Match with fade-out duration
+    };
+
+    const showDownloadOptions = (buttonsToShow) => {
+        downloadOptions.classList.remove('hidden');
+
+        // Show specified buttons
+        buttonsToShow.forEach(buttonId => {
+            const button = document.getElementById(buttonId);
+            button.classList.remove('hidden');
+            button.classList.add('visible'); // Trigger visibility animation
+        });
+
+        // Fade in the download options
+        setTimeout(() => {
+            downloadOptions.classList.add('visible');
+        }, 10); // Delay to allow for showing buttons
+    };
+
+    const showOptions = () => {
+        options.classList.remove('hidden');
+        options.classList.remove('fade-out');
+        setTimeout(() => {
+            options.classList.remove('fade-out'); // Reset fade-out class
+        }, 10); // Small timeout to trigger the animation
+    };
+</script>
+
+</body>
+</html>

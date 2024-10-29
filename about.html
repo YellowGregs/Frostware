@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, blue, white);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .founders {
+            color: black;
+        }
+        .owners {
+            color: pink;
+        }
+        .co-owners {
+            color: red;
+        }
+        .developers {
+            color: cyan;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="aboutContent">
+    <h1>About Us</h1>
+    <p class="founders"><strong>Founders:</strong> Jake, Celeste</p>
+    <p class="owners"><strong>Owners:</strong> Kakey, Alex</p>
+    <p class="co-owners"><strong>Co-Owners:</strong> Dj. Doge</p>
+    <p class="developers"><strong>Developers:</strong> Jhamai, Kayzi, Jason, YellowGreg, Diet Coke, Djfunk</p>
+</div>
+
+<script>
+    const aboutContent = document.getElementById('aboutContent');
+
+    const handleScroll = () => {
+        const { top } = aboutContent.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (top < windowHeight * 0.8) {
+            aboutContent.classList.add('visible');
+            window.removeEventListener('scroll', handleScroll);
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+</script>
+
+</body>
+</html>
