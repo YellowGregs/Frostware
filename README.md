@@ -9,6 +9,6 @@ Revamp
 - etc...
 
 # Contributor
-Jakey - Web Dev
-YellowGreg - Web Dev & Designer
-Wspboy12 - Web Designer
+- Jakey - Web Dev
+- YellowGreg - Web Dev & Designer
+- Wspboy12 - Web Designer
