@@ -1,157 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluxus Z</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FZ Team - Fluxus Z</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: #000;
-            z-index: 100;
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10;
+      position: relative;
+    }
 
-        .logo {
-            font-size: 1.5em;
-        }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      animation: textAnimation 2s infinite alternate;
+    }
 
-        .menu-icon {
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+    @keyframes textAnimation {
+      0% { color: #fff; }
+      50% { color: #00aaff; }
+      100% { color: #ff00ff; }
+    }
 
-        .menu-icon:hover {
-            transform: scale(1.2);
-        }
+    .menu-icon {
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
 
-        main {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            animation: fadeIn 2s ease-in;
-            padding-top: 60px;
-        }
+    .menu-icon:hover {
+      color: #00aaff;
+    }
 
-        .intro h2 {
-            font-size: 1.2em;
-            color: #aaa;
-            animation: fadeInDown 1.5s ease;
-        }
+    #nav-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 20;
+    }
 
-        .intro h1 {
-            font-size: 3em;
-            color: #00f;
-            animation: fadeInUp 1.5s ease;
-        }
+    #nav-menu.show {
+      display: flex;
+      opacity: 1;
+    }
 
-        .intro p {
-            font-size: 1em;
-            color: #00f;
-            letter-spacing: 2px;
-            filter: blur(1px);
-            animation: fadeInUp 2s ease-in;
-        }
+    #nav-menu ul {
+      list-style: none;
+      text-align: center;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    #nav-menu ul li {
+      margin: 1rem 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    #nav-menu ul li:nth-child(1) { animation-delay: 0.2s; }
+    #nav-menu ul li:nth-child(2) { animation-delay: 0.4s; }
+    #nav-menu ul li:nth-child(3) { animation-delay: 0.6s; }
+    #nav-menu ul li:nth-child(4) { animation-delay: 0.8s; }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    #nav-menu ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
 
-        .dropdown-container {
-            position: absolute;
-            right: 20px;
-            top: 60px;
-            display: none;
-        }
+    #nav-menu ul li a:hover {
+      color: #00aaff;
+    }
 
-        .dropdown-menu {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-            background-color: #111;
-            border-radius: 5px;
-            overflow: hidden;
-        }
+    .close-icon {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      cursor: pointer;
+    }
 
-        .dropdown-menu li {
-            margin: 5px 0;
-        }
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-        .dropdown-menu a {
-            color: #00f;
-            text-decoration: none;
-            padding: 10px 15px;
-            display: block;
-            background: #111;
-            transition: all 0.3s ease;
-        }
+    .hero-content {
+      color: white;
+      animation: fadeIn 2s ease-in;
+    }
 
-        .dropdown-menu a:hover {
-            background: #00f;
-            color: #fff;
-        }
-    </style>
+    .hero-content p {
+      font-size: 1.5rem;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+
+    .hero-content .neo {
+      font-size: 2rem;
+      color: #00aaff;
+    }
+
+    .animated-text {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      animation: textAnimate 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes textAnimate {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .floating-square {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: rgba(30, 144, 255, 0.2);
+      animation: float 3s ease-in-out infinite;
+      border-radius: 5px;
+    }
+
+    .floating-square.glow {
+      box-shadow: 0 0 10px rgba(30, 144, 255, 0.8);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="logo">FZ Team</div>
-        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-    </header>
+  <header>
+    <div class="logo">FZ Team</div>
+    <div class="menu-icon" onclick="openMenu()">☰</div>
+  </header>
 
-    <main>
-        <div class="intro">
-            <h2>Introducing</h2>
-            <h1>Fluxus Z</h1>
-            <p>Next gen exploiting</p>
-        </div>
-    </main>
+  <nav id="nav-menu">
+    <div class="close-icon" onclick="closeMenu()">X</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./download">Download</a></li>
+      <li><a href="./faq.html">FAQ</a></li>
+    </ul>
+  </nav>
 
-    <div class="dropdown-container" id="dropdownContainer">
-        <ul class="dropdown-menu">
-            <li><a href="./download.html">Download</a></li>
-            <li><a href="./FAQ.html">FAQ</a></li>
-            <li><a href="./about.html">About Us</a></li>
-        </ul>
+  <section class="hero">
+    <div class="hero-content">
+      <p id="intro-text">Introducing</p>
+      <h1>Fluxus <span class="neo">Z</span></h1>
+      <div class="animated-text">Next Gen exploit</div>
     </div>
+  </section>
 
-    <script>
-        function toggleMenu() {
-            const dropdownContainer = document.getElementById('dropdownContainer');
-            dropdownContainer.style.display = dropdownContainer.style.display === 'block' ? 'none' : 'block';
-        }
-    </script>
+  <script>
+    function openMenu() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.style.display = 'flex';
+      setTimeout(() => {
+        navMenu.classList.add('show');
+      }, 10);
+      document.getElementById('intro-text').style.opacity = '0';
+    }
+
+    function closeMenu() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.remove('show');
+      setTimeout(() => {
+        navMenu.style.display = 'none';
+      }, 500);
+      document.getElementById('intro-text').style.opacity = '1';
+    }
+
+    function createSquares(num) {
+      const hero = document.querySelector('.hero');
+      for (let i = 0; i < num; i++) {
+        const square = document.createElement('div');
+        square.className = 'floating-square' + (Math.random() > 0.5 ? ' glow' : '');
+        const size = Math.random() * 40 + 20;
+        square.style.width = `${size}px`;
+        square.style.height = `${size}px`;
+        square.style.top = `${Math.random() * 100}vh`;
+        square.style.left = `${Math.random() * 100}vw`;
+        square.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        hero.appendChild(square);
+      }
+    }
+
+    createSquares(15);
+  </script>
 </body>
 </html>
