@@ -1,253 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FZ Team - Fluxus Z</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 10;
-      position: relative;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      animation: textAnimation 2s infinite alternate;
-    }
-
-    @keyframes textAnimation {
-      0% { color: #fff; }
-      50% { color: #00aaff; }
-      100% { color: #ff00ff; }
-    }
-
-    .menu-icon {
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    .menu-icon:hover {
-      color: #00aaff;
-    }
-
-    #nav-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      width: 100%;
-      height: 100%;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 20;
-    }
-
-    #nav-menu.show {
-      display: flex;
-      opacity: 1;
-    }
-
-    #nav-menu ul {
-      list-style: none;
-      text-align: center;
-    }
-
-    #nav-menu ul li {
-      margin: 1rem 0;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.5s ease forwards;
-    }
-
-    #nav-menu ul li:nth-child(1) { animation-delay: 0.2s; }
-    #nav-menu ul li:nth-child(2) { animation-delay: 0.4s; }
-    #nav-menu ul li:nth-child(3) { animation-delay: 0.6s; }
-    #nav-menu ul li:nth-child(4) { animation-delay: 0.8s; }
-
-    #nav-menu ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.5rem;
-      transition: color 0.3s ease;
-    }
-
-    #nav-menu ul li a:hover {
-      color: #00aaff;
-    }
-
-    .close-icon {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .hero-content {
-      color: white;
-      animation: fadeIn 2s ease-in;
-    }
-
-    .hero-content p {
-      font-size: 1.5rem;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-
-    .hero-content h1 {
-      font-size: 4rem;
-      font-weight: bold;
-    }
-
-    .hero-content .neo {
-      font-size: 2rem;
-      color: #00aaff;
-    }
-
-    .animated-text {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      font-weight: bold;
-      animation: textAnimate 3s ease-in-out infinite;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FZ Team - Fluxus Z</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow-x: hidden;
       }
-    }
 
-    @keyframes textAnimate {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-
-    .floating-square {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background-color: rgba(30, 144, 255, 0.2);
-      animation: float 3s ease-in-out infinite;
-      border-radius: 5px;
-    }
-
-    .floating-square.glow {
-      box-shadow: 0 0 10px rgba(30, 144, 255, 0.8);
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo">FZ Team</div>
-    <div class="menu-icon" onclick="openMenu()">☰</div>
-  </header>
-
-  <nav id="nav-menu">
-    <div class="close-icon" onclick="closeMenu()">X</div>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="./about.html">About</a></li>
-      <li><a href="./download.html">Download</a></li>
-      <li><a href="./FAQ.html">FAQ</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-content">
-      <p id="intro-text">Introducing</p>
-      <h1>Fluxus <span class="neo">Z</span></h1>
-      <div class="animated-text">Next Gen exploit</div>
-    </div>
-  </section>
-
-  <script>
-    function openMenu() {
-      const navMenu = document.getElementById('nav-menu');
-      navMenu.style.display = 'flex';
-      setTimeout(() => {
-        navMenu.classList.add('show');
-      }, 10);
-      document.getElementById('intro-text').style.opacity = '0';
-    }
-
-    function closeMenu() {
-      const navMenu = document.getElementById('nav-menu');
-      navMenu.classList.remove('show');
-      setTimeout(() => {
-        navMenu.style.display = 'none';
-      }, 500);
-      document.getElementById('intro-text').style.opacity = '1';
-    }
-
-    function createSquares(num) {
-      const hero = document.querySelector('.hero');
-      for (let i = 0; i < num; i++) {
-        const square = document.createElement('div');
-        square.className = 'floating-square' + (Math.random() > 0.5 ? ' glow' : '');
-        const size = Math.random() * 40 + 20;
-        square.style.width = `${size}px`;
-        square.style.height = `${size}px`;
-        square.style.top = `${Math.random() * 100}vh`;
-        square.style.left = `${Math.random() * 100}vw`;
-        square.style.animationDuration = `${Math.random() * 3 + 2}s`;
-        hero.appendChild(square);
+      .navbar {
+        background: rgba(8, 2, 11, 0.5);
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+        backdrop-filter: blur(10px);
       }
-    }
 
-    createSquares(15);
-  </script>
-</body>
+      .navbar-brand {
+        color: #00aaff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .navbar-brand a {
+        color: #00aaff;
+      }
+
+      .navbar-brand:hover {
+        color: #dc143c;
+        text-decoration: none;
+      }
+
+      .navbar-nav .nav-link {
+        color: #c5c6c7 !important;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #146edc !important;
+      }
+
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .hero {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-content h1 {
+        font-size: 5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: baseline;
+      }
+
+      .hero-content .neo {
+        font-size: 6rem;
+        background: linear-gradient(135deg, #00bfff, #008ad4);
+        -webkit-background-clip: text;
+        color: transparent;
+        padding: 10px;
+        font-weight: 700;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 54, 67, 0.7);
+        margin-left: -0.2rem;
+      }
+
+      .hero-content p,
+      .hero-content .next-gen {
+        font-size: 1.5rem;
+        opacity: 0.9;
+        margin: 0.5rem 0;
+      }
+
+      .floating-square {
+        position: absolute;
+        border-radius: 5px;
+        animation: float 3s ease-in-out infinite;
+        box-shadow: 0 0 15px rgba(30, 144, 255, 0.7);
+      }
+
+      .floating-square.transparent {
+        background-color: rgba(30, 144, 255, 0.5);
+      }
+
+      .floating-square.solid {
+        background-color: rgba(30, 144, 255, 1);
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="#">FZ Team</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./download.html">Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./FAQ.html">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://discord.gg/ZtugZZeGGs" target="_blank">Discord</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="background"></div>
+      <div class="hero-content">
+        <p id="intro-text">Introducing</p>
+        <h1>Fluxus <span class="neo">Z</span></h1>
+        <div class="next-gen">Next Gen exploit</div>
+      </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function createFloatingSquares(num) {
+        const background = document.querySelector(".background");
+
+        for (let i = 0; i < num; i++) {
+          const square = document.createElement("div");
+          square.className = "floating-square";
+
+          const isTransparent = Math.random() > 0.5;
+          square.classList.add(isTransparent ? "transparent" : "solid");
+
+          const size = Math.random() * 40 + 20;
+          square.style.width = `${size}px`;
+          square.style.height = `${size}px`;
+          square.style.top = `${Math.random() * 100}vh`;
+          square.style.left = `${Math.random() * 100}vw`;
+          square.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+          background.appendChild(square);
+        }
+      }
+
+      createFloatingSquares(15);
+    </script>
+  </body>
 </html>
