@@ -2,10 +2,7 @@
 Revamp
 
 ## TODO
-- make some of the sqaure glow, or not glow, or transparent together, with different size all randomize.
-- Fix Bug issue for Mobile device screen.
 - Improve Main Page design a bit more.
-- Fix a height screen issue for mobile.
 - etc...
 
 # Contributor
