@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FluxusZ - Download</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -143,30 +144,92 @@
         .dark-mode .toggle-button {
             color: #ffd700;
         }
+
+        .navbar {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 160px);
+            padding: 1rem 2rem;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease-in-out;
+          }
+      
+          .header.transparent {
+            background-color: rgba(16, 16, 16, 0.5);
+            backdrop-filter: blur(5px);
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+          }
+      
+          .header.sticky {
+            border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+          }
+      
+          .navbar a {
+            float: left;
+            display: block;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            border-radius: 20px;
+          }
+      
+          .navbar a:hover {
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+            color: rgb(123, 123, 123);
+            transition: background-color 0.3s ease, color 0.3s ease;
+          }
+      
+          .developer-tab {
+            color: white;
+            margin-right: auto;
+          }
+      
+          .home {
+            color: white;
+            margin-right: auto;
+          }
+
     </style>
 </head>
 <body>
+
+    <div class="navbar">
+        <a href="./index.html" class="home">Home</a>
+        <a href="./about.html" class="home">Developer</a>
+        <a href="https://discord.gg/fluxusz" target="_blank"> © FZ Team</a>
+    </div>
+
     <div class="background" id="background"></div>
     <div class="container">
         <h1>FluxusZ Download</h1>
         <button class="toggle-button" onclick="toggleDarkMode()" id="themeToggleButton">&#9728;</button>
 
         <div class="platform" onclick="toggleDropdown('android')">
-            <h2>Android <span class="arrow" id="androidArrow">&#9654;</span></h2>
+            <h2><i class="fab fa-android"></i> Android <span class="arrow" id="androidArrow">&#9654;</span></h2>
             <div class="download-options" id="androidOptions">
                 <a href="#" class="download-link">FluxusZ (W.I.P)</a>
             </div>
         </div>
 
         <div class="platform" onclick="toggleDropdown('ios')">
-            <h2>iOS <span class="arrow" id="iosArrow">&#9654;</span></h2>
+            <h2><i class="fab fa-apple"></i> iOS <span class="arrow" id="iosArrow">&#9654;</span></h2>
             <div class="download-options" id="iosOptions">
                 <a href="#" class="download-link">FluxusZ (W.I.P)</a>
             </div>
         </div>
 
         <div class="platform" onclick="toggleDropdown('windows')">
-            <h2>Windows <span class="arrow" id="windowsArrow">&#9654;</span></h2>
+            <h2><i class="fab fa-windows"></i> Windows <span class="arrow" id="windowsArrow">&#9654;</span></h2>
             <div class="download-options" id="windowsOptions">
                 <a href="#" class="download-link">FluxusZ (W.I.P)</a>
                 <a href="https://gofile.io/d/YHKJYI" class="download-link">FrostWare</a>
