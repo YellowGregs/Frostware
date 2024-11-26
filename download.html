@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FluxusZ - Download</title>
+    <title>FluxusWare - Download</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -211,27 +211,27 @@
 
     <div class="background" id="background"></div>
     <div class="container">
-        <h1>FluxusZ Download</h1>
+        <h1>FluxusWare Download</h1>
         <button class="toggle-button" onclick="toggleDarkMode()" id="themeToggleButton">&#9728;</button>
 
         <div class="platform" onclick="toggleDropdown('android')">
             <h2><i class="fab fa-android"></i> Android <span class="arrow" id="androidArrow">&#9654;</span></h2>
             <div class="download-options" id="androidOptions">
-                <a href="#" class="download-link">FluxusZ (W.I.P)</a>
+                <a href="#" class="download-link">FluxusWare (W.I.P)</a>
             </div>
         </div>
 
         <div class="platform" onclick="toggleDropdown('ios')">
             <h2><i class="fab fa-apple"></i> iOS <span class="arrow" id="iosArrow">&#9654;</span></h2>
             <div class="download-options" id="iosOptions">
-                <a href="#" class="download-link">FluxusZ (W.I.P)</a>
+                <a href="#" class="download-link">FluxusWare (W.I.P)</a>
             </div>
         </div>
 
         <div class="platform" onclick="toggleDropdown('windows')">
             <h2><i class="fab fa-windows"></i> Windows <span class="arrow" id="windowsArrow">&#9654;</span></h2>
             <div class="download-options" id="windowsOptions">
-                <a href="#" class="download-link">FluxusZ (W.I.P)</a>
+                <a href="#" class="download-link">FluxusWare (W.I.P)</a>
                 <a href="FrostWareInstaller.zip" class="download-link">FrostWare</a>
             </div>
         </div>
@@ -263,7 +263,7 @@
             }
         }
 
-        function createSquares(num) {
+        function Square(num) {
             const background = document.getElementById('background');
             for (let i = 0; i < num; i++) {
                 const square = document.createElement('div');
@@ -279,7 +279,7 @@
         }
 
         loadTheme();
-        createSquares(15);
+        Square(15);
     </script>
 </body>
 </html>
