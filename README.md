@@ -14,5 +14,5 @@ Revamp
 
 # link
 - was suppose to be fluxusZ but the owner changed it into fluxware.
+  ... it changed to frostware now..
   
-[Fluxware](https://fluxware.vercel.app/)
