@@ -3,251 +3,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FZ Team - FluxusWare</title>
+    <title>Frostware - Official</title>
+    <link rel="icon" type="image/png" href="./logo.jpg" />
+
+
+    <meta property="og:title" content="Frostware - Official">
+    <meta property="og:description" content="Normal executor to execute script.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="./logo.jpg">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: "Montserrat", sans-serif;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
+    <meta name="theme-color" content="#00aaff">
 
-        .navbar {
-            background: rgba(8, 2, 11, 0.5);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .navbar-brand {
-            color: #00aaff;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .navbar-brand a {
-            color: #00aaff;
-        }
-
-        .navbar-brand:hover {
-            color: #dc143c;
-            text-decoration: none;
-        }
-
-        .navbar-nav .nav-link {
-            color: #c5c6c7 !important;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #146edc !important;
-        }
-
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        .hero-content h1 {
-            font-size: 6rem;
-            font-weight: bold;
-            display: flex;
-            align-items: baseline;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 0.5s;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 178, 255, 0.7);
-        }
-
-        .hero-content .neo {
-            font-size: 7rem;
-            background: linear-gradient(135deg, #00bfff, #008ad4);
-            -webkit-background-clip: text;
-            color: transparent;
-            padding: 10px;
-            font-weight: 700;
-            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
-            margin-left: -0.2rem;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 1s;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            margin: 0.5rem 0;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 1.5s;
-        }
-
-        .next-gen {
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 2s;
-        }
-
-        .join-updates {
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 2.5s;
-        }
-
-        .widget-container {
-            width: 100%; 
-            max-width: 350px;
-            height: 500px;
-            overflow: auto;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2;
-            margin-top: 20px;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            animation-delay: 3s;
-            border: none;
-            border-radius: 15px; 
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        .widget-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .widget-container::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 10px; 
-        }
-
-        .widget-container::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .floating-square {
-            position: absolute;
-            border-radius: 5px;
-            animation: float 3s ease-in-out infinite;
-            box-shadow: 0 0 15px rgba(30, 144, 255, 0.7);
-        }
-
-        .floating-square.transparent {
-            background-color: rgba(30, 144, 255, 0.5);
-        }
-
-        .floating-square.solid {
-            background-color: rgba(30, 144, 255, 1);
-        }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 4rem; 
-            }
-
-            .hero-content .neo {
-                font-size: 5rem; 
-            }
-
-            .widget-container {
-                height: 400px;
-            }
-
-            .next-gen, .join-updates {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-content h1 {
-                font-size: 3rem; 
-            }
-
-            .hero-content .neo {
-                font-size: 4rem; 
-            }
-
-            .widget-container {
-                height: 300px;
-            }
-        }
-
-        .snowflake {
-          position: absolute;
-          color: #ffffff;
-          font-size: 1rem;
-          opacity: 0.8;
-          animation: fall linear infinite;
-          pointer-events: none;
-      }
-
-      @keyframes fall {
-          0% {
-              transform: translateY(-10vh);
-              opacity: 0;
-          }
-          50% {
-              opacity: 1;
-          }
-          100% {
-              transform: translateY(110vh);
-              opacity: 0;
-          }
-      }
-    </style>
+    <link rel="stylesheet" href="index.css"/>
 </head>
 <body>
+    <div id="loading-overlay">
+        <div id="loading-line"></div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">FZ Team</a>
+        <a class="navbar-brand" href="#">Frostware</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -256,17 +38,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./download.html">Download</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./about.html">About Us</a>
-                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="./developer.html">Developers</a>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="./FAQ.html">FAQ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://discord.gg/ZtugZZeGGs" target="_blank">Discord</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://celestesbypasser.vercel.app/" target="_blank">Add Bot</a>
+                    <a class="nav-link" href="https://discord.gg/3VUUpGRD6D" target="_blank">Discord</a>
                 </li>
             </ul>
         </div>
@@ -275,18 +54,25 @@
     <section class="hero">
         <div class="background"></div>
         <div class="hero-content">
-            <h1>Fluxus <span class="neo">Ware</span></h1>
+            <h1><span class="neo">Frost</span>ware</h1>
             <div class="next-gen">Next Gen exploit</div>
         </div>
-        <div class="widget-container">
-            <iframe src="https://discord.com/widget?id=1283644308012007506&theme=dark" width="100%" height="100%" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-        </div>
+        <!-- <div class="widget-container">
+            <iframe src="https://discord.com/widget?id=1295258555888177182&theme=dark" width="100%" height="100%" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div> -->
     </section>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        //from the line animation 
+      //window.onload = () => {
+      //  setTimeout(() => {
+      //    document.getElementById('loading-overlay').classList.add('fade-out');
+      //  }, 2000); 
+     // }
+
       function Squares(num) {
         const background = document.querySelector(".background");
 
@@ -308,24 +94,29 @@
 
     function snowflakes(num) {
         const background = document.querySelector(".background");
-
+    
         for (let i = 0; i < num; i++) {
             const snowflake = document.createElement("div");
             snowflake.className = "snowflake";
-            snowflake.innerHTML = "&#10052;"; 
-
-            const size = Math.random() * 25 + 15; 
+            snowflake.innerHTML = "&#10052;";
+    
+            const size = Math.random() * 25 + 15;
+            const wind = Math.random() * 20 - 10;
+            const animationDuration = Math.random() * 5 + 5;
+            const animationDelay = Math.random() * 5;
+    
             snowflake.style.fontSize = `${size}px`;
             snowflake.style.left = `${Math.random() * 100}vw`;
-            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`; 
-            snowflake.style.animationDelay = `${Math.random() * 5}s`;
-
+            snowflake.style.animationDuration = `${animationDuration}s`;
+            snowflake.style.animationDelay = `${animationDelay}s`;
+            snowflake.style.setProperty('--wind', `${wind}px`);
+    
             background.appendChild(snowflake);
         }
     }
-
+        
     Squares(15);
-    snowflakes(30); 
+    snowflakes(30);
     </script>
 </body>
 </html>
